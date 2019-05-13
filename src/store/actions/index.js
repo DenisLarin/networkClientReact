@@ -1,0 +1,1 @@
+export {singIN,authCheck, signUP,logOut} from './authorization/authorization'
