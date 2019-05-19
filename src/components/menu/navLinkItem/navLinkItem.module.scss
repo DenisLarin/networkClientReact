@@ -1,6 +1,19 @@
-.navlinkItem{
-
+.navlinkItem {
+  margin-bottom: 30px;
+  color: #454545;
+  &:last-child{
+    margin-bottom: 0;
+  }
+  a{
+    color: #454545;
+    opacity: 0.5;
+    transition: 300ms;
+    &:hover{
+      color: #5085E8;
+    }
+  }
 }
-.active{
 
+a.active {
+  opacity: 1;
 }

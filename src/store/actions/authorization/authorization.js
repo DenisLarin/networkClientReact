@@ -1,6 +1,7 @@
 import axios from './../../../axios/axios-account'
 
 import * as accountActionTypes from '../actionsTypes/Authorization';
+import socketIOCLient from 'socket.io-client';
 
 
 const signINStarted = () => {
@@ -9,14 +10,16 @@ const signINStarted = () => {
     };
 };
 
-const signINSuccess = (token, userID, isAuto = false) => {
+const signINSuccess = (token, userID,loginedUser, isOnline = false, isAuto = false,) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userID', userID);
     return {
         type: accountActionTypes.SIGN_IN_SUCCESS,
         token: token,
         userID: userID,
-        isAuto
+        isAuto,
+        isOnline,
+        user: loginedUser
     };
 };
 const signINSFailed = (error, isAuto = false) => {
@@ -47,9 +50,16 @@ export const singIN = (email, password) => {
         };
         axios.post('/signin', data)
             .then(response => {
-                dispatch(signINSuccess(response.data.token, response.data.userID));
+                const socket = socketIOCLient('localhost:3000');
+                socket.emit('SINGIN', response.data.token);
+                socket.on('SINGIN', isOnline => {
+                    dispatch(signINSuccess(response.data.token, response.data.userID,response.data.user,isOnline));
+                });
             }).catch(err => {
-            dispatch(signINSFailed(err.response.data.error))
+            if (err.response)
+                dispatch(signINSFailed(err.response.data.error));
+            else
+                dispatch(signINSFailed(err.response))
         });
     };
 };
@@ -108,9 +118,12 @@ export const authCheck = () => {
         };
         axios.post('/checktoken', null, config)
             .then(response => {
-                dispatch(signINSuccess(token, response.data.userID, true));
+                dispatch(signINSuccess(token, response.data.userID,response.data.user, true));
             }).catch(err => {
-            dispatch(signINSFailed(err.response.data, true))
+            if (err.response)
+                dispatch(signINSFailed(err.response.data, true));
+            else
+                dispatch(signINSFailed(err.response, true))
         })
     };
 };

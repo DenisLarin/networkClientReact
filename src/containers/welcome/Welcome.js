@@ -85,7 +85,7 @@ class Welcome extends Component {
                     elementType: 'input',
                     elementConfig: {
                         type: 'tel',
-                        pattern:"\+7\-[0-9]{3}\-[0-9]{3}\-[0-9]{2}\-[0-9]{2}"
+                        pattern:'+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'
                     },
                     LabelConfig: {
                         labelText: "phone",

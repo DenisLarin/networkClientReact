@@ -1,9 +1,12 @@
 import * as accountActionTypes from '../../actions/actionsTypes/Authorization';
 import updateObject from './../../../shared/updateObject'
+import {ninvoke} from "q";
 
 const initialState = {
     token: null,
     userID: null,
+    user: null,
+    isOnline: false,
     isAutoSignIN:false,
     loading: false,
     loginError: null,
@@ -12,11 +15,11 @@ const initialState = {
 };
 
 const signINStarted = (state, action)=> {
-    return updateObject(state,{loginError: null,loading: true});
+    return updateObject(state,{loginError: null,loading: true,token:null,userID:null,isOnline:null});
 };
 
 function signINSuccess(state, action) {
-    return updateObject(state,{token: action.token,userID: action.userID,isAutoSignIN: action.isAuto,loading: false, loginError: null});
+    return updateObject(state,{isOnline: action.isOnline,token: action.token,userID: action.userID,isAutoSignIN: action.isAuto,loading: false, loginError: null,user: action.user});
 }
 
 function signINSFailed(state, action) {
@@ -34,7 +37,7 @@ const signUPSuccess= (state, action)=>{
 };
 
 function logOut(state, action) {
-    return updateObject(state, {token: null,userID:null});
+    return updateObject(state, {token: null,userID:null,isOnline:null});
 }
 
 const reducer = (state = initialState, action) => {

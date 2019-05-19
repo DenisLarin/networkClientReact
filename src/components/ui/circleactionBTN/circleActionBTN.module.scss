@@ -1,0 +1,16 @@
+.circleActionBTN{
+  align-self: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  margin-right: 10px;
+  background-color: #5085E8;
+  box-shadow: 0px 13px 30px rgba(3,65,177,0.3);
+  &:last-child{
+    margin-right: 0px;
+  }
+  img{
+    max-width: 100%;
+
+  }
+}

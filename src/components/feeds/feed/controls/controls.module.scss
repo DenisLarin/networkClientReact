@@ -1,0 +1,9 @@
+.controls {
+  display: flex;
+  justify-content: space-around;
+
+  .left {
+    display: flex;
+    flex-grow: 1;
+  }
+}

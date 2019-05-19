@@ -17,3 +17,16 @@ input{
     box-shadow: none;
     outline: none;
 }
+a{
+    text-decoration: none;
+    color: #454545;
+}
+a.active{
+    opacity: 1 !important;
+}
+button{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}

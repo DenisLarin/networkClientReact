@@ -1,0 +1,12 @@
+.feedInput{
+  flex-grow: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: #454545;
+  font-size: 17px;
+  border-radius: 10px;
+  &:focus{
+    border: 1px solid #E3EFFF;
+  }
+}

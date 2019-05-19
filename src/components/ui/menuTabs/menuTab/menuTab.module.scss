@@ -1,0 +1,28 @@
+.menuTab{
+  padding: 10px;
+  color: #454545;
+  opacity: 0.5;
+  margin-right: 20px;
+  cursor: pointer;
+  transition: 300ms;
+  &_backgrounded{
+    color: #5085E8;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &.active {
+    opacity: 1;
+  }
+
+  &.active_line {
+    border-bottom: 1px solid #5085E8;
+  }
+
+  &.active_background {
+    border-radius: 10px;
+    background-color: #3C5A99;
+    color: #fff;
+  }
+}

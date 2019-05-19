@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './leftToolBar.module.scss'
-import Logo from "../../logo/Logo";
+import Logo from "../../menu/logo/Logo";
 import Menu from "../../menu/Menu";
 
 function LeftToolBar(props) {
