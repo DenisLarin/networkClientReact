@@ -1,0 +1,8 @@
+export const GET_FEEDS_START = 'GET_FEEDS_START';
+export const GET_FEEDS_FAILED = 'GET_FEEDS_FAILED';
+export const GET_FEEDS_SUCCESS = 'GET_FEEDS_SUCCESS';
+
+
+export const ADD_FEED_START = 'ADD_FEED_START';
+export const ADD_FEED_FAILED = 'ADD_FEED_FAILED';
+export const ADD_FEED_SUCCESS = 'ADD_FEED_SUCCESS';

@@ -4,6 +4,7 @@ import Content from "../../../hoc/content/content";
 import Feeds from "../../feeds/Feeds";
 import {connect} from "react-redux";
 import userEmptyPhoto from './../../../assets/icons/userProfile/userEmptyPhoto.svg'
+import Info from "../info/Info";
 
 class UserContent extends Component {
     render() {
@@ -12,8 +13,9 @@ class UserContent extends Component {
             case 'history':
                 content = <Feeds page={this.props.page}/>;
                 break;
-
-
+            case 'info':
+                content = <Info page={this.props.page}/>;
+                break;
         }
         return (
             <div className={classes.userContent}>

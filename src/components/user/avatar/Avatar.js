@@ -3,7 +3,6 @@ import classes from "./avatar.module.scss";
 import avatarBG from './../../../assets/icons/userProfile/userEmptyPhoto.svg'
 
 function Avatar(props) {
-    console.log(props);
     let url = avatarBG;
     if (props.avatarURL)
         url = props.avatarURL;
