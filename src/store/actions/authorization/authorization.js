@@ -85,7 +85,7 @@ const signUPFailed = (error) => {
     };
 };
 
-export const signUP = (name, surname, email, password, birthday, gender) => {
+export const signUP = (name, surname, email, password, birthday, gender,phone) => {
     return dispatch => {
         dispatch(signUPStarted());
         const data = {
@@ -95,7 +95,8 @@ export const signUP = (name, surname, email, password, birthday, gender) => {
                 email,
                 password,
                 gender,
-                birthday
+                birthday,
+                phone
             }
         };
         axios.post('/signup', data)

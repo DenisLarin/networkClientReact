@@ -58,7 +58,7 @@ const mapDispatchToProps = dispatch=>{
 const mapStateToProps = state=>{
   return{
       userName: state.userReducer.user.name,
-      userLogedAvatarURL: state.authorizationReducer.user.avatarURL,
+      userLogedAvatarURL: state.authorizationReducer.user ? state.authorizationReducer.user.avatarURL : '',
       token: state.authorizationReducer.token,
   }
 };

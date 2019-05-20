@@ -35,16 +35,79 @@ export const getLikes = (token, feeds) => {
 
         axios.post('/getpostldl', {'postID': postIDs}, config).then(response => {
             let likes = {};
-            response.data.likes.map(like => {
-                if (likes[like.postID])
-
-                else
-                    likes[like.postID] = {userID: like.userID, type: like.type};
-            });
-            console.log(likes);
+            if (response.data.likes)
+                response.data.likes.map(like => {
+                    let postID = like.postID;
+                    if (likes[postID])
+                        likes[postID].push({userID: like.userID, type: like.type});
+                    else
+                        likes[postID] = [{userID: like.userID, type: like.type}]
+                });
             dispatch(getLikesSuccess(likes));
         }).catch(error => {
             console.log(error);
         });
     };
+};
+
+const likeDislikeStart = () => {
+    return {
+        type: likesActionTypes.LIKE_DISLIKE_STARTED
+    }
+};
+const likeDislikeFailed = (error) => {
+    return {
+        type: likesActionTypes.LIKE_DISLIKE_FAILED,
+        error
+    }
+};
+const likeDislikeSuccess = (like) => {
+    return {
+        type: likesActionTypes.LIKE_DISLIKE_SUCCESS,
+        like
+    }
+};
+
+export const addLikeDislike = (token, like) => {
+    return dispatch => {
+        console.log(like);
+        dispatch(likeDislikeStart());
+        console.log(like.type);
+        let url = '/addposttlike';
+        if (like.type == 'dislike')
+            url = '/addpostdislike';
+        const config = {
+            headers: {
+                Authorization: token
+            }
+        };
+        axios.post(url, {postID: like.postID}, config).then(response => {
+            dispatch(likeDislikeSuccess({userID: like.userID, type: like.type, feedID: like.postID}));
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+};
+export const removeLikeDislike = (token, like) => {
+    return dispatch => {
+        console.log(like);
+        dispatch(likeDislikeStart());
+        const config = {
+            headers: {
+                Authorization: token
+            }
+        };
+        axios.post('/deletepostlike', {postID: like.postID}, config).then(response => {
+            console.log(response.data);
+            dispatch(likeDislikeSuccess({userID: like.userID, type: like.type, feedID: like.postID, remove: true}));
+        }).catch(error => {
+            console.log(error.response);
+        });
+    }
+};
+export const changeLikeDislike = (token, like) => {
+    return dispatch => {
+        console.log(like);
+        dispatch(addLikeDislike(token, like));
+    }
 };

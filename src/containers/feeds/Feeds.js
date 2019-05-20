@@ -6,15 +6,45 @@ import * as actions from './../../store/actions/index'
 
 class Feeds extends Component {
     componentDidMount() {
-        if (this.props.feeds.length <= 0)
-            this.props.getFeeds(this.props.token, this.props.page);
+        this.props.getFeeds(this.props.token, this.props.page);
     }
 
-    onDislikeClickHandler = (event, feedID) => {
-        console.log(feedID);
-    };
+
     onLikeClickHandler = (event, feedID) => {
-        console.log(feedID);
+        console.log('LLLL');
+        const type = 'like';
+        this.actionWithLike(feedID, type);
+    };
+    onDislikeClickHandler = (event, feedID) => {
+        console.log('DDDD');
+        const type = 'dislike';
+        this.actionWithLike(feedID, type);
+    };
+    actionWithLike = (feedID, type) => {
+        const userID = this.props.userID;
+        if (!this.props.postsLikes[feedID]) { //если на записи нет лайков, то добавляем
+            this.props.addLikeDislike(this.props.token, {postID: feedID, type, userID: this.props.userID});
+        } else { //проверяем ставил ли пользователь лайк/дизлайк на этот пост
+            let isGo = false;
+            this.props.postsLikes[feedID].map(likes => {
+                if (likes.userID == userID) { //пользователь ставил лайк на этот пост
+                    isGo = true;
+                    if (likes.type !== type)
+                        this.props.changeLikeDislike(this.props.token, {
+                            postID: feedID,
+                            type,
+                            userID: this.props.userID
+                        });
+                    else this.props.removeLikeDislike(this.props.token, {
+                        postID: feedID,
+                        type,
+                        userID: this.props.userID
+                    });
+                }
+            });
+            if (!isGo)
+                this.props.addLikeDislike(this.props.token, {postID: feedID, type, userID: this.props.userID});
+        }
     };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -31,7 +61,8 @@ class Feeds extends Component {
         let feeds = null;
         feeds = this.props.feeds.map(feed => {
             if (this.props.postsLikes) {
-                return <Feed id={feed.postID} key={feed.postID} userSurname={feed.surname} userName={feed.name}
+                return <Feed feedID={feed.postID} userID={this.props.userID} key={feed.postID}
+                             userSurname={feed.surname} userName={feed.name}
                              date={feed.postTime}
                              likedPost={this.props.postsLikes[feed.postID]}
                              avatarURL={feed.avatarURL} content={feed.postContent} likes={feed.likes}
@@ -53,19 +84,18 @@ const mapDispatchToProps = dispatch => {
     return {
         getFeeds: (token, pageID) => dispatch(actions.getFeeds(token, pageID)),
         getLDL: (token, feeds) => dispatch(actions.getLikes(token, feeds)),
+
+        addLikeDislike: (token, like) => dispatch(actions.addLikeDislike(token, like)),
+        removeLikeDislike: (token, like) => dispatch(actions.removeLikeDislike(token, like)),
+        changeLikeDislike: (token, like) => dispatch(actions.changeLikeDislike(token, like)),
     }
 };
 const mapStateToProps = state => {
     return {
         token: state.authorizationReducer.token,
+        userID: state.authorizationReducer.user.userID,
         feeds: state.feedsReducer.feeds ? state.feedsReducer.feeds : [],
-        postsLikes: state.likesReducer.likes,
-
-        username: state.userReducer.user ? state.userReducer.user.name : '',
-
-        userLogedAvatarURL: state.authorizationReducer.user ? state.authorizationReducer.user.avatarURL : '',
-        userLogedPageID: state.authorizationReducer.user ? state.authorizationReducer.user.userID : '',
-
+        postsLikes: state.likesReducer.likes ? state.likesReducer.likes : null,
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Feeds);

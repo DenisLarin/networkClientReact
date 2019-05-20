@@ -27,7 +27,7 @@ function InputField(props) {
             </label>;
             break;
         case 'select':
-            inputElement = <select>
+            inputElement = <select onChange={props.changed}>
                 {props.elementConfig.options.map(elemet=>{
                     return <option key={elemet.value} value={elemet.value}>{elemet.displayValue}</option>
                 })};

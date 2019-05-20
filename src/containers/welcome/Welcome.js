@@ -168,6 +168,7 @@ class Welcome extends Component {
         this.setState({[formName]: updated});
     };
     onChangeHandler = (event, id, formName) => {
+        console.log(event.target.value);
         let updated = this.state[formName];
         updated[id].value = event.target.value;
         this.setState({[formName]: updated});
