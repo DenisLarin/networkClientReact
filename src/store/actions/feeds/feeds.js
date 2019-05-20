@@ -46,7 +46,7 @@ const addFeedFailed = () => {
         type: feedActions.ADD_FEED_FAILED
     }
 };
-const addFeedSuccess = () => {
+const addFeedSuccess = (newFeed) => {
     return {
         type: feedActions.ADD_FEED_SUCCESS
     }
@@ -58,7 +58,7 @@ export const addFeed = (token, pageID, feed) => {
         dispatch(addFeedStart());
         /*"INSERT INTO posts SET `postContent`=NULL, `userID`=1,wherePageID='30'"*/
         const payload = {
-            post:{
+            post: {
                 postContent: feed,
                 wherePageID: pageID
             }
@@ -69,9 +69,9 @@ export const addFeed = (token, pageID, feed) => {
                 Authorization: token
             }
         };
-        axios.post('/addpost',payload, config).then(result=>{
-            console.log(result.data);
-        }).catch(error=>{
+        axios.post('/addpost', payload, config).then(result => {
+            dispatch(getFeeds(token,pageID));
+        }).catch(error => {
             console.log(error.response);
         })
     }

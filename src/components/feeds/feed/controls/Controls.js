@@ -11,8 +11,8 @@ function Controls(props) {
     return (
         <div className={classes.controls}>
             <div className={classes.left}>
-                <ControlItem icon={like} counter={props.likes}/>
-                <ControlItem icon={dislike} counter={props.dislikes}/>
+                <ControlItem isLike={props.isLike} onControlItemClick={props.onLikeClick} icon={like} type="like" counter={props.likes}/>
+                <ControlItem isDL={props.isDL} onControlItemClick={props.onDislikeClick} icon={dislike} type="dislike" counter={props.dislikes}/>
                 <ControlItem icon={comments} counter={0}/>
             </div>
             <ControlItem icon={shows} counter={props.shows}/>

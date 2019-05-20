@@ -9,17 +9,27 @@
     margin-right: 0;
   }
 
-  img {
+  svg {
     width: 25px;
     height: auto;
     align-self: center;
-    margin-right: 10px;
+  }
 
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-  span{
+  span {
     font-size: 1rem;
+    margin-left: 10px;
   }
+}
+
+.likeItemSVGIcon {
+  fill: transparent;
+  stroke: #d3d8e0;
+  stroke-width: 2;
+  transition: 300ms;
+  &:hover{
+    fill: #d3d8e0;
+  }
+}
+.dislikeActive, .likeActive{
+  fill: red
 }
