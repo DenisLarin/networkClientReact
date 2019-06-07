@@ -15,6 +15,7 @@ import User from './store/reducers/user/user'
 import Feeds from './store/reducers/feeds/feeds'
 import Likes from './store/reducers/likes/likes'
 import Friends from './store/reducers/friends/friends'
+import Search from './store/reducers/search/search'
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
@@ -24,6 +25,8 @@ const rootReducer = combineReducers({
     feedsReducer: Feeds,
     likesReducer: Likes,
     friendsReducer: Friends,
+    searchReducer: Search,
+
 });
 
 const store = createStore(rootReducer, composeEnhancers(

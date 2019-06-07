@@ -25,7 +25,9 @@ class App extends Component {
                         <Switch>
                             <Route path='/userpage/:id' exact component={UserPage}/>
                             <Route path='/friends' exact component={Friends}/>
-                            <Route path='/search/' component={SearchFriends}/>
+                            <Route path='/search/' exact component={SearchFriends}/>
+                            <Route path='/search/:searchParams' exact component={SearchFriends}/>
+                            <Redirect to={'/userpage/'+this.props.userID}/>
                         </Switch>
                     </Layout>
                 );

@@ -66,6 +66,7 @@ export const getFriends = (token, userID, status) => {
 
 export const addToFriend = (token, userID) => {
     return dispatch => {
+        console.log(userID);
         const recipientUserID = userID;
         const config = {
             headers: {

@@ -85,7 +85,7 @@ class Welcome extends Component {
                     elementType: 'input',
                     elementConfig: {
                         type: 'tel',
-                        pattern:'+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'
+                        pattern: '+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'
                     },
                     LabelConfig: {
                         labelText: "phone",
@@ -179,10 +179,11 @@ class Welcome extends Component {
     };
     singup = (event) => {
         event.preventDefault();
-        if (this.state.registerForm.password.value !== this.state.registerForm.repassword.value){
+        if (this.state.registerForm.password.value !== this.state.registerForm.repassword.value) {
             alert("Пароли не совпадают");
             return;
-        };
+        }
+        ;
         this.props.onSignUP(this.state.registerForm.name.value, this.state.registerForm.surname.value, this.state.registerForm.email.value, this.state.registerForm.password.value, this.state.registerForm.birthday.value, this.state.registerForm.gender.value);
     };
 
@@ -208,7 +209,7 @@ class Welcome extends Component {
                     const key = loginElement.id;
                     return <InputField
                         key={key}
-                        id={key+"login"}
+                        id={key + "login"}
                         elementType={loginElement.config.elementType}
                         elementConfig={loginElement.config.elementConfig}
                         LabelConfig={loginElement.config.LabelConfig}
@@ -229,7 +230,7 @@ class Welcome extends Component {
                     const key = registerElement.id;
                     return <InputField
                         key={key}
-                        id={key+"register"}
+                        id={key + "register"}
                         elementType={registerElement.config.elementType}
                         elementConfig={registerElement.config.elementConfig}
                         LabelConfig={registerElement.config.LabelConfig}
@@ -239,7 +240,8 @@ class Welcome extends Component {
                         value={registerElement.config.value}
                         changed={(event) => this.onChangeHandler(event, registerElement.id, 'registerForm')}/>
                 })}
-                {this.props.registerError ? <p style={{'color': 'red'}}>{this.props.registerError.errorCodeStatus}</p> : null}
+                {this.props.registerError ?
+                    <p style={{'color': 'red'}}>{this.props.registerError.errorCodeStatus}</p> : null}
                 {this.props.registerSuccess ? <p style={{'color': 'red'}}>{this.props.registerSuccess}</p> : null}
                 <SubmitButton disable={this.state.registerForm.disable}>Зарегистрироваться</SubmitButton>
             </form>

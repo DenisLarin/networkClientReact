@@ -21,6 +21,9 @@ class FriendCard extends Component {
             request: [
                 {logo: add, type: 'acceptFriend'},
                 {logo: remove, type: 'cancelFriend'}
+            ],
+            searchFriend:[
+                {logo: add, type:'addFriend'}
             ]
         }
     };
@@ -42,6 +45,9 @@ class FriendCard extends Component {
             case 'removeFriend':
                 this.props.remove(this.props.token, this.props.userID);
                 break;
+            case 'addFriend':
+                this.props.addToFriend(this.props.token, this.props.userID);
+                break;
         }
     };
 
@@ -51,6 +57,8 @@ class FriendCard extends Component {
             menu = this.state.menus.response;
         if (this.props.tab == 'request')
             menu = this.state.menus.request;
+        if (this.props.tab == 'searchFriend')
+            menu = this.state.menus.searchFriend;
         let styles = null;
         if (this.state.showExternalMenu)
             styles = {height: 50 + 25 + menu.length * 3 + menu.length * 30};
@@ -76,6 +84,7 @@ const mapDispatchToProps = dispatch => {
         accept: (token, userID) => dispatch(actions.acceptFriend(token, userID)),
         cancel: (token, userID) => dispatch(actions.canceledFriend(token, userID)),
         remove: (token, userID) => dispatch(actions.removeFriend(token, userID)),
+        addToFriend: (token, userID) => dispatch(actions.addToFriend(token, userID)),
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(FriendCard);

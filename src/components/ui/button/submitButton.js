@@ -3,7 +3,7 @@ import classes from './submitButton.module.scss'
 
 function SubmitButton(props) {
     return (
-        <button className={classes.submitButton} disabled={props.disable}>{props.children}</button>
+        <button className={classes.submitButton} onClick={props.onBTNclick?props.onBTNclick: null} disabled={props.disable}>{props.children}</button>
     );
 }
 
