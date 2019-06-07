@@ -1,6 +1,6 @@
 import axios from './../../../axios/axios-account'
 
-import * as accountActionTypes from '../actionsTypes/Authorization';
+import * as accountActionTypes from '../actionsTypes/authorizationActions';
 import socketIOCLient from 'socket.io-client';
 
 

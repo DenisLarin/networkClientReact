@@ -1,4 +1,4 @@
-import * as likesActionTypes from './../../actions/actionsTypes/Likes';
+import * as likesActionTypes from '../../actions/actionsTypes/likesActions';
 import updateObject from './../../../shared/updateObject'
 
 const initState = {

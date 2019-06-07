@@ -1,6 +1,6 @@
 import axios from './../../../axios/axios-user'
 
-import * as userActionTypes from '../actionsTypes/User'
+import * as userActionTypes from '../actionsTypes/userActions'
 import socketIOClient from 'socket.io-client';
 
 const getUserStated = () => {
@@ -32,7 +32,7 @@ export const getUser = (token, userID) => {
             .then(response => {
                 dispatch(getUserSuccess(response.data.user));
             }).catch(error => {
-                dispatch(getUserFailed(error.response.data.error));
+                dispatch(getUserFailed(error.response));
         });
     }
 };

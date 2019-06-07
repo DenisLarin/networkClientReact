@@ -1,5 +1,5 @@
 import axios from './../../../axios/axios-likes'
-import * as likesActionTypes from '../actionsTypes/Likes'
+import * as likesActionTypes from '../actionsTypes/likesActions'
 
 
 const getLikesStated = () => {
@@ -70,9 +70,7 @@ const likeDislikeSuccess = (like) => {
 
 export const addLikeDislike = (token, like) => {
     return dispatch => {
-        console.log(like);
         dispatch(likeDislikeStart());
-        console.log(like.type);
         let url = '/addposttlike';
         if (like.type == 'dislike')
             url = '/addpostdislike';
@@ -90,7 +88,6 @@ export const addLikeDislike = (token, like) => {
 };
 export const removeLikeDislike = (token, like) => {
     return dispatch => {
-        console.log(like);
         dispatch(likeDislikeStart());
         const config = {
             headers: {
@@ -98,7 +95,6 @@ export const removeLikeDislike = (token, like) => {
             }
         };
         axios.post('/deletepostlike', {postID: like.postID}, config).then(response => {
-            console.log(response.data);
             dispatch(likeDislikeSuccess({userID: like.userID, type: like.type, feedID: like.postID, remove: true}));
         }).catch(error => {
             console.log(error.response);
@@ -107,7 +103,6 @@ export const removeLikeDislike = (token, like) => {
 };
 export const changeLikeDislike = (token, like) => {
     return dispatch => {
-        console.log(like);
         dispatch(addLikeDislike(token, like));
     }
 };

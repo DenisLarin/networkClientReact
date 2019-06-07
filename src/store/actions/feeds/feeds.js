@@ -1,4 +1,4 @@
-import * as feedActions from './../../actions/actionsTypes/Feeds'
+import * as feedActions from '../actionsTypes/feedsActions'
 import axios from './../../../axios/axios-feeds';
 
 const getFeedsStarted = () => {
@@ -18,7 +18,12 @@ const getFeedsSuccess = (feeds) => {
         feeds
     }
 };
-
+export const updateCounters = (feedID, type,params)=>{
+    return{
+        type: feedActions.UPDATE_COUNTERS,
+        payload: {feedID,type,params}
+    }
+};
 export const getFeeds = (token, pageID) => {
     return dispatch => {
         dispatch(getFeedsStarted());
@@ -53,7 +58,6 @@ const addFeedSuccess = (newFeed) => {
 };
 
 export const addFeed = (token, pageID, feed) => {
-    console.log('press');
     return dispatch => {
         dispatch(addFeedStart());
         /*"INSERT INTO posts SET `postContent`=NULL, `userID`=1,wherePageID='30'"*/

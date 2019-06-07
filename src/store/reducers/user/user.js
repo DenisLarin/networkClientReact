@@ -1,4 +1,4 @@
-import * as userActionTypes from './../../actions/actionsTypes/User';
+import * as userActionTypes from '../../actions/actionsTypes/userActions';
 import updateObject from './../../../shared/updateObject'
 
 const initState = {

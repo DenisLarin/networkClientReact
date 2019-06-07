@@ -2,6 +2,10 @@
   align-self: center;
   width: 70px;
   height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   border-radius: 100%;
   margin-right: 10px;
   background-color: #5085E8;
@@ -9,8 +13,37 @@
   &:last-child{
     margin-right: 0px;
   }
-  img{
-    max-width: 100%;
-
+  &.active{
+    height: max-content;
+    padding: 10px;
+    justify-content: space-around;
+    border-radius: 10px;
+    .button{
+      margin-top: 10px;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px solid red;
+      padding: 5px;
+      cursor: pointer;
+      img{
+        width: 80%;
+      }
+    }
   }
+  &.small{
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    box-shadow: none;
+  }
+}
+//.content{
+//  opacity: 0;
+//  visibility: hidden;
+//}
+//.button{
+//  display: none;
+//}
+.propsBTN{
+  cursor: pointer;
 }

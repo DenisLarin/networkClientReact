@@ -1,4 +1,4 @@
-import * as accountActionTypes from '../../actions/actionsTypes/Authorization';
+import * as accountActionTypes from '../../actions/actionsTypes/authorizationActions';
 import updateObject from './../../../shared/updateObject'
 import {ninvoke} from "q";
 

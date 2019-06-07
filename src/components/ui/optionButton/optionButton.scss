@@ -1,0 +1,136 @@
+.menu-btn {
+  display: block;
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
+}
+
+.menu-btn-smaller {
+  width: 50px;
+  height: 50px;
+}
+
+.menu-btn span,
+.menu-btn span::before,
+.menu-btn span::after {
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+  left: 50%;
+  margin-left: -10px;
+  width: 20px;
+  height: 2px;
+  background-color: #222;
+}
+
+.menu-btn span::before,
+.menu-btn span::after {
+  content: '';
+  display: block;
+  transition: 0.2s;
+}
+
+.menu-btn span::before {
+  transform: translateY(-5px);
+}
+
+.menu-btn_active span {
+  height: 0;
+}
+
+.menu-btn span::after {
+  transform: translateY(5px);
+}
+
+.menu-btn_active span:before {
+  transform: rotate(-45deg);
+  transform-origin: center;
+}
+
+.menu-btn_active span:after {
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+.menu-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.menu-block-smaller {
+  align-self: flex-start;
+}
+
+.menu a {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5085E8;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  transition: 0.4s;
+  position: absolute;
+  padding: 10px;
+  left: calc(50% - 15px);
+  top: calc(50% - 15px);
+  z-index: 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+.menu-smaller a {
+  width: 30px;
+  height: 30px;
+  padding: 4px;
+}
+
+
+
+.menu a:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.menu a:nth-child(2) {
+  transition-delay: 0.2s;
+
+}
+
+.menu a:nth-child(3) {
+  transition-delay: 0.3s;
+}
+@for $i from 0 through 10 {
+  .menu a:nth-child(#{$i+1}){
+   transition-delay: 0.1s + $i*0.12s;
+  }
+}
+
+.menu_active a:nth-child(1) {
+  transform: translate(-150%, 0%);
+}
+
+.menu_active a:nth-child(2) {
+  transform: translate(-100%, 100%);
+}
+
+.menu_active a:nth-child(3) {
+  transform: translate(0%, 150%);
+}
+
+.menu-btn_active_down a {
+  left: calc(50% - 15px);
+}
+
+@for $i from 0 through 10 {
+  .menu-btn_active_down a:nth-child(#{$i+1}){
+    transform: translateY(45px + $i*35px) translateX(0);
+  }
+}

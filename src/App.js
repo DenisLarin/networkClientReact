@@ -5,6 +5,8 @@ import UserPage from "./containers/userPage/UserPage";
 import {connect} from "react-redux";
 import * as actions from './store/actions/index'
 import Layout from "./hoc/layout/Layout";
+import Friends from "./containers/friends/Friends";
+import SearchFriends from "./containers/search/SearchFriends";
 
 
 class App extends Component {
@@ -22,7 +24,8 @@ class App extends Component {
                     <Layout>
                         <Switch>
                             <Route path='/userpage/:id' exact component={UserPage}/>
-                            <Redirect to={"/userpage/"+this.props.userID}/>
+                            <Route path='/friends' exact component={Friends}/>
+                            <Route path='/search/' component={SearchFriends}/>
                         </Switch>
                     </Layout>
                 );

@@ -7,7 +7,8 @@ function Menu(props) {
         <ul className={classes.menu}>
             <NavLinkItem link='/userpage' exact>Моя страница</NavLinkItem>
             <NavLinkItem link='/friends' exact>Друзья</NavLinkItem>
-            <NavLinkItem link='/messages' exact>Сообщения</NavLinkItem>
+            <NavLinkItem link='/search' exact>Поиск друзей</NavLinkItem>
+            <NavLinkItem link='/im' exact>Сообщения</NavLinkItem>
         </ul>
     );
 }

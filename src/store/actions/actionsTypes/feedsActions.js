@@ -7,4 +7,4 @@ export const ADD_FEED_START = 'ADD_FEED_START';
 export const ADD_FEED_FAILED = 'ADD_FEED_FAILED';
 export const ADD_FEED_SUCCESS = 'ADD_FEED_SUCCESS';
 
-export const SAVEFEEDS = "SAVEFEEDS";
+export const UPDATE_COUNTERS = 'UPDATE_COUNTERS';

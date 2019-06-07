@@ -11,12 +11,10 @@ class Feeds extends Component {
 
 
     onLikeClickHandler = (event, feedID) => {
-        console.log('LLLL');
         const type = 'like';
         this.actionWithLike(feedID, type);
     };
     onDislikeClickHandler = (event, feedID) => {
-        console.log('DDDD');
         const type = 'dislike';
         this.actionWithLike(feedID, type);
     };
@@ -24,26 +22,34 @@ class Feeds extends Component {
         const userID = this.props.userID;
         if (!this.props.postsLikes[feedID]) { //если на записи нет лайков, то добавляем
             this.props.addLikeDislike(this.props.token, {postID: feedID, type, userID: this.props.userID});
+            this.props.updateCounters(feedID,type, 'add');
         } else { //проверяем ставил ли пользователь лайк/дизлайк на этот пост
             let isGo = false;
             this.props.postsLikes[feedID].map(likes => {
                 if (likes.userID == userID) { //пользователь ставил лайк на этот пост
                     isGo = true;
-                    if (likes.type !== type)
+                    if (likes.type !== type) {
                         this.props.changeLikeDislike(this.props.token, {
                             postID: feedID,
                             type,
                             userID: this.props.userID
                         });
-                    else this.props.removeLikeDislike(this.props.token, {
-                        postID: feedID,
-                        type,
-                        userID: this.props.userID
-                    });
+                        this.props.updateCounters(feedID,type, 'change');
+                    }
+                    else {
+                        this.props.removeLikeDislike(this.props.token, {
+                            postID: feedID,
+                            type,
+                            userID: this.props.userID
+                        });
+                        this.props.updateCounters(feedID,type, 'remove');
+                    }
                 }
             });
-            if (!isGo)
+            if (!isGo) {
                 this.props.addLikeDislike(this.props.token, {postID: feedID, type, userID: this.props.userID});
+                this.props.updateCounters(feedID,type, 'add');
+            }
         }
     };
 
@@ -88,6 +94,7 @@ const mapDispatchToProps = dispatch => {
         addLikeDislike: (token, like) => dispatch(actions.addLikeDislike(token, like)),
         removeLikeDislike: (token, like) => dispatch(actions.removeLikeDislike(token, like)),
         changeLikeDislike: (token, like) => dispatch(actions.changeLikeDislike(token, like)),
+        updateCounters: (feedID, type,params)=>dispatch(actions.updateCounters(feedID,type,params)),
     }
 };
 const mapStateToProps = state => {

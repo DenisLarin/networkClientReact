@@ -14,6 +14,8 @@ function Avatar(props) {
         cl = [classes.user__avatar, classes.user__avatar_smaller];
     if (props.middle)
         cl = [classes.user__avatar, classes.user__avatar_middle];
+    if (props.hunder)
+        cl = [classes.user__avatar, classes.user__avatar_hunder];
     return (
         <div className={cl.join(' ')} style={userAvatarBG}></div>
     );

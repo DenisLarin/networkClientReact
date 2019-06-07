@@ -51,7 +51,7 @@ class UserPage extends Component {
 
                     <UserProfileHeader isOnline={this.props.isOnline} userData={this.props.userData}
                                        headerTabsMenuClickHandler={this.headerTabMenuClickHandler}
-                                       headerTabsMenu={this.state.headerTabsMenu}/>
+                                       headerTabsMenu={this.state.headerTabsMenu} userID={this.props.match.params.id}/>
                     <UserContent page={this.props.match.params.id} tab={this.state.witchTab}/>
                 </div>
                 : <h2>Модуль 404</h2>
