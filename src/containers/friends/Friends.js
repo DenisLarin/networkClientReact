@@ -52,6 +52,7 @@ class Friends extends Component {
 
     componentDidMount() {
         this.props.getFriends(this.props.token, this.props.userID, 'accepted');
+        this.props.reupdateLikes();
     }
 
     renderFriends = () => {
@@ -90,6 +91,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getFriends: (token, userID, status) => dispatch(actions.getFriends(token, userID, status)),
+        reupdateLikes: ()=>dispatch(actions.reupdateLikes())
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Friends);

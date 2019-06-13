@@ -38,7 +38,9 @@ const likeDislikeSuccess = (state, action) => {
     };
     return updateObject(state, {likes: updated});
 };
-
+const reupdate = (state, action) => {
+    return updateObject(state, {likes: null});
+};
 const reducer = (state = initState, action) => {
     switch (action.type) {
         case likesActionTypes.GET_LIKE_SUCCESS:
@@ -47,6 +49,8 @@ const reducer = (state = initState, action) => {
             return getLikesStarted(state, action);
         case likesActionTypes.LIKE_DISLIKE_SUCCESS:
             return likeDislikeSuccess(state, action);
+        case likesActionTypes.REUPDATE_LIKES:
+            return reupdate(state, action);
         default:
             return state;
     }

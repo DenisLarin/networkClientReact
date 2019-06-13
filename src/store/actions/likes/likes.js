@@ -106,3 +106,9 @@ export const changeLikeDislike = (token, like) => {
         dispatch(addLikeDislike(token, like));
     }
 };
+
+export const reupdateLikes = ()=>{
+    return{
+        type: likesActionTypes.REUPDATE_LIKES,
+    }
+};

@@ -5,7 +5,7 @@ import logo from '../../../assets/logo/logo.svg'
 
 function Logo(props) {
     return (
-        <Link to="/userpage">
+        <Link to={`/userpage/${props.userID}`}>
             <img src={logo} alt="" className={classes.logo}/>
         </Link>
     );

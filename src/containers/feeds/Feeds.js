@@ -3,7 +3,6 @@ import classes from './feeds.module.scss'
 import Feed from "../../components/feeds/feed/Feed";
 import {connect} from "react-redux";
 import * as actions from './../../store/actions/index'
-
 class Feeds extends Component {
     componentDidMount() {
         this.props.getFeeds(this.props.token, this.props.page);

@@ -25,8 +25,17 @@ class UserPage extends Component {
     };
 
     componentDidMount() {
-        if (this.props.match.params.id)
+        if (this.props.match.params.id) {
             this.props.getUserData(this.props.token, this.props.match.params.id);
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.match.params.id != this.props.match.params.id) {
+            console.log(1232131);
+            this.props.getUserData(this.props.token, this.props.match.params.id);
+            this.props.reupdateLikes();
+        }
     }
 
     headerTabMenuClickHandler = (event, id, type) => {
@@ -44,6 +53,7 @@ class UserPage extends Component {
             }
         });
     };
+
 
     render() {
         return (
@@ -64,6 +74,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getUserData: (token, userID) => dispatch(actions.getUser(token, userID)),
         addNewFeed: (token, pageID, feed) => dispatch(actions.addFeed(token, pageID, feed)),
+        reupdateLikes: ()=>dispatch(actions.reupdateLikes()),
     }
 };
 const mapStateToProps = (state) => {

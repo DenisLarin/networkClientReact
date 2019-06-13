@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Welcome from "./containers/welcome/Welcome";
-import {Route, Switch, Redirect} from 'react-router-dom';
+import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import UserPage from "./containers/userPage/UserPage";
 import {connect} from "react-redux";
 import * as actions from './store/actions/index'
@@ -16,6 +16,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.props);
         var routes = null;
         if (this.props.isAuth) {
             routes = (
@@ -26,19 +27,16 @@ class App extends Component {
                         <Route path='/search/' exact component={SearchFriends}/>
                         <Route path='/settings/' exact component={Settings}/>
                         <Route path='/search/:searchParams' exact component={SearchFriends}/>
-                        <Redirect to={'/userpage/' + this.props.userID}/>
                     </Switch>
                 </Layout>
             );
         } else {
             if (!this.props.isAutoSignIN && !this.props.isAuth && !(!this.props.loginError || !this.props.registerError)) {
-                console.log('empty');
                 return <div></div>
             } else {
-                console.log('NOempty');
                 routes = (
                     <Switch>
-                        <Route path='/' exact component={Welcome}/>
+                        <Route path='/' component={Welcome}/>
                         <Redirect to="/"/>
                     </Switch>
                 );

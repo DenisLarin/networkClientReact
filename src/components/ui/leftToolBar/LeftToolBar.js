@@ -6,8 +6,8 @@ import Menu from "../../menu/Menu";
 function LeftToolBar(props) {
     return (
         <div className={classes.leftToolBar}>
-            <Logo/>
-            <Menu/>
+            <Logo userID={props.userID}/>
+            <Menu userID={props.userID}/>
         </div>
     );
 }

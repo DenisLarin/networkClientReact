@@ -11,7 +11,7 @@ class Layout extends Component {
         if (this.props.isAuth)
             toolMenu = (
                 <Wrapper>
-                    <LeftToolBar/>
+                    <LeftToolBar userID={this.props.userID}/>
                     {/*<UserAccountNavigationPannel/>*/}
                 </Wrapper>
             );
@@ -29,6 +29,7 @@ class Layout extends Component {
 const mapStateToProps = (state) => {
     return {
         isAuth: state.authorizationReducer.token !== null,
+        userID: state.authorizationReducer.userID,
     }
 };
 export default connect(mapStateToProps)(Layout);
