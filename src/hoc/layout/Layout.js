@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Aux from "../aux/Aux";
+import Wrapper from "../wrapper/Wrapper";
 import LeftToolBar from "../../components/ui/leftToolBar/LeftToolBar";
 import UserAccountNavigationPannel from "../../components/user/userAccountNavigationPannel/UserAccountNavigationPannel";
 import {connect} from "react-redux";
@@ -10,18 +10,18 @@ class Layout extends Component {
         let toolMenu = null;
         if (this.props.isAuth)
             toolMenu = (
-                <Aux>
+                <Wrapper>
                     <LeftToolBar/>
                     {/*<UserAccountNavigationPannel/>*/}
-                </Aux>
+                </Wrapper>
             );
         return (
-            <Aux>
+            <Wrapper>
                 {toolMenu}
                 <main className={classes.content}>
                     {this.props.children}
                 </main>
-            </Aux>
+            </Wrapper>
         );
     }
 }
