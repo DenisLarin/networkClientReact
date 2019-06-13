@@ -34,7 +34,7 @@ class Welcome extends Component {
                         required: true,
                     },
                     LabelConfig: {
-                        labelText: "password",
+                        labelText: "пароль",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: true,
@@ -49,7 +49,7 @@ class Welcome extends Component {
                         required: true,
                     },
                     LabelConfig: {
-                        labelText: "name",
+                        labelText: "имя",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: true,
@@ -62,7 +62,7 @@ class Welcome extends Component {
                         required: true,
                     },
                     LabelConfig: {
-                        labelText: "surname",
+                        labelText: "фамилия",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: true,
@@ -88,7 +88,7 @@ class Welcome extends Component {
                         pattern: '+7-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}'
                     },
                     LabelConfig: {
-                        labelText: "phone",
+                        labelText: "телефон",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: true,
@@ -101,7 +101,7 @@ class Welcome extends Component {
                         required: true,
                     },
                     LabelConfig: {
-                        labelText: "password",
+                        labelText: "пароль",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: true,
@@ -114,7 +114,7 @@ class Welcome extends Component {
                         required: true,
                     },
                     LabelConfig: {
-                        labelText: "repassword",
+                        labelText: "повторный пароль",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: true,
@@ -129,7 +129,7 @@ class Welcome extends Component {
                         required: true
                     },
                     LabelConfig: {
-                        labelText: "birthday",
+                        labelText: "дата рождения",
                     },
                     labelGoogleEffectActive: false,
                     googleEffect: false,
@@ -139,8 +139,8 @@ class Welcome extends Component {
                     elementType: 'select',
                     elementConfig: {
                         options: [
-                            {value: 'M', displayValue: 'male'},
-                            {value: 'F', displayValue: 'female'},
+                            {value: 'M', displayValue: 'Мужской'},
+                            {value: 'F', displayValue: 'Женский'},
                         ],
                     },
                     labelGoogleEffectActive: false,
@@ -161,16 +161,19 @@ class Welcome extends Component {
     }
 
     googleEffectHandler = (id, formName) => {
-        let updated = this.state[formName];
+        const updated = this.state[formName];
         if (updated[id].value)
             return;
         updated[id].labelGoogleEffectActive = !updated[id].labelGoogleEffectActive;
         this.setState({[formName]: updated});
     };
+
     onChangeHandler = (event, id, formName) => {
-        console.log(event.target.value);
         let updated = this.state[formName];
         updated[id].value = event.target.value;
+        if (updated[id].value && !updated[id].labelGoogleEffectActive) {
+            updated[id].labelGoogleEffectActive = true;
+        };
         this.setState({[formName]: updated});
     };
     login = (event) => {
@@ -184,7 +187,7 @@ class Welcome extends Component {
             return;
         }
         ;
-        this.props.onSignUP(this.state.registerForm.name.value, this.state.registerForm.surname.value, this.state.registerForm.email.value, this.state.registerForm.password.value, this.state.registerForm.birthday.value, this.state.registerForm.gender.value);
+        this.props.onSignUP(this.state.registerForm.name.value, this.state.registerForm.surname.value, this.state.registerForm.email.value, this.state.registerForm.password.value, this.state.registerForm.birthday.value, this.state.registerForm.gender.value, this.state.registerForm.phone.value);
     };
 
     render() {
@@ -262,6 +265,9 @@ class Welcome extends Component {
                         <li>информация пользователя</li>
                         <li>Записи пользователей</li>
                         <li>возможность перехода на страницы другого пользователя</li>
+                        <li>поиск пользователя</li>
+                        <li>Добавление в друзья</li>
+                        <li>Базовые настройки пользователя</li>
                     </ul>
                 </div>
                 <div className={classes.form}>
@@ -281,7 +287,7 @@ class Welcome extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSignIN: (email, password) => dispatch(actions.singIN(email, password)),
-        onSignUP: (name, surname, email, password, birthday, gender) => dispatch(actions.signUP(name, surname, email, password, birthday, gender))
+        onSignUP: (name, surname, email, password, birthday, gender, phone) => dispatch(actions.signUP(name, surname, email, password, birthday, gender, phone))
     }
 };
 const mapStateToProps = (state) => {
@@ -290,7 +296,6 @@ const mapStateToProps = (state) => {
         registerError: state.authorizationReducer.registerError,
         registerSuccess: state.authorizationReducer.registerSuccess,
         isAuth: state.authorizationReducer.token != null,
-
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

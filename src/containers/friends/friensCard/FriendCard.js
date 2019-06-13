@@ -7,6 +7,7 @@ import add from './../../../assets/icons/friends/addFriend.png.svg'
 
 import * as actions from './../../../store/actions/index'
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 class FriendCard extends Component {
     state = {
@@ -22,8 +23,8 @@ class FriendCard extends Component {
                 {logo: add, type: 'acceptFriend'},
                 {logo: remove, type: 'cancelFriend'}
             ],
-            searchFriend:[
-                {logo: add, type:'addFriend'}
+            searchFriend: [
+                {logo: add, type: 'addFriend'}
             ]
         }
     };
@@ -34,8 +35,8 @@ class FriendCard extends Component {
             }
         })
     };
-    onmenuClick = event => {
-        switch (event.currentTarget.type) {
+    onmenuClick = (event, type) => {
+        switch (type) {
             case 'acceptFriend':
                 this.props.accept(this.props.token, this.props.userID);
                 break;
@@ -64,8 +65,10 @@ class FriendCard extends Component {
             styles = {height: 50 + 25 + menu.length * 3 + menu.length * 30};
         return (
             <div className={style.friendCard} style={styles}>
-                <UserInfo hunder avatarURL={this.props.avatarURL} userName={this.props.userName}
-                          userSurname={this.props.userSurname} email={this.props.email}/>
+                <Link to={'/userpage/' + this.props.userID}>
+                    <UserInfo hunder avatarURL={this.props.avatarURL} userName={this.props.userName}
+                              userSurname={this.props.userSurname} email={this.props.email}/>
+                </Link>
                 <OptionButton middle menus={menu} active={this.state.showExternalMenu}
                               onMenuItemClick={this.onmenuClick}
                               onMenuClickHandler={this.showMenuHandler}/>

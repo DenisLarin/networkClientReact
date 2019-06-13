@@ -28,7 +28,7 @@ const signINSFailed = (error, isAuto = false) => {
         loginError: error,
         isAuto
     };
-}
+};
 
 export const logOut = () => {
     localStorage.removeItem('token');
@@ -50,16 +50,18 @@ export const singIN = (email, password) => {
         };
         axios.post('/signin', data)
             .then(response => {
-                const socket = socketIOCLient('localhost:3000');
-                socket.emit('SINGIN', response.data.token);
-                socket.on('SINGIN', isOnline => {
-                    dispatch(signINSuccess(response.data.token, response.data.userID,response.data.user,isOnline));
-                });
+                // const socket = socketIOCLient('http://networkapi.worklabserver.tmweb.ru:3000/');
+                // socket.emit('SINGIN', response.data.token);
+                // socket.on('SINGIN', isOnline => {
+                //     dispatch(signINSuccess(response.data.token, response.data.userID,response.data.user,isOnline));
+                // });
+                // socket.on('Error', data => {
+                //     dispatch(signINSFailed(data));
+                // });
+                    dispatch(signINSuccess(response.data.token, response.data.userID,response.data.user));
             }).catch(err => {
-            if (err.response)
-                dispatch(signINSFailed(err.response.data.error));
-            else
-                dispatch(signINSFailed(err.response))
+                console.log(err.response.data);
+                dispatch(signINSFailed(err.response.data));
         });
     };
 };

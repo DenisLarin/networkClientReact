@@ -18,7 +18,7 @@ class UserProfileHeader extends Component {
         showExternalMenu: false,
         menus: [
             {logo: addFriend, type: 'addFriend'},
-            {logo: settings}
+            {logo: settings, url:'/settings'}
         ]
     };
     showMenuHandler = () => {
@@ -28,10 +28,8 @@ class UserProfileHeader extends Component {
             }
         })
     };
-    onmenuClick = event => {
-        // console.log(event.currentTarget.type);
-        // console.log(this.props.userID);
-        switch (event.currentTarget.type) {
+    onmenuClick = (event, type) => {
+        switch (type) {
             case 'addFriend':
                 this.props.addToFriend(this.props.token, this.props.userID);
                 break;
@@ -48,7 +46,7 @@ class UserProfileHeader extends Component {
                         <div className={classes.user__header_content}>
                             <Avatar avatarURL={user.avatarURL}/>
                             <div className={classes.user__header_content_text}>
-                                <h1>{user.name + " " + user.surname}<span>{" isOnline: " + this.props.isOnline}</span>
+                                <h1>{user.name + " " + user.surname}<br/><span>{" Онлайн: " + this.props.isOnline}</span>
                                 </h1>
                                 <p>{user.userDescription}</p>
                             </div>

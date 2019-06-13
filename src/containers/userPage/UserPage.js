@@ -11,16 +11,17 @@ class UserPage extends Component {
             type: 'headerTabsMenu',
             items: {
                 history: {
-                    name: 'History',
+                    name: 'История',
                     isActive: true,
                 },
                 info: {
-                    name: 'Info',
+                    name: 'Информация',
                     isActive: false
                 }
             }
         },
         witchTab: 'history',
+        updated: false,
     };
 
     componentDidMount() {
@@ -29,7 +30,6 @@ class UserPage extends Component {
     }
 
     headerTabMenuClickHandler = (event, id, type) => {
-
         const updatedBlock = this.state[type].items;
         for (let key in updatedBlock)
             updatedBlock[key].isActive = false;
@@ -39,7 +39,8 @@ class UserPage extends Component {
             return {
                 ...state[type],
                 updatedBlock,
-                witchTab: id
+                witchTab: id,
+                updated: !state.updated,
             }
         });
     };
@@ -48,10 +49,10 @@ class UserPage extends Component {
         return (
             this.props.userData ?
                 <div>
-
                     <UserProfileHeader isOnline={this.props.isOnline} userData={this.props.userData}
                                        headerTabsMenuClickHandler={this.headerTabMenuClickHandler}
-                                       headerTabsMenu={this.state.headerTabsMenu} userID={this.props.match.params.id}/>
+                                       headerTabsMenu={this.state.headerTabsMenu} userID={this.props.match.params.id}
+                                       updated={this.state.updated}/>
                     <UserContent page={this.props.match.params.id} tab={this.state.witchTab}/>
                 </div>
                 : <h2>Модуль 404</h2>
@@ -62,6 +63,7 @@ class UserPage extends Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         getUserData: (token, userID) => dispatch(actions.getUser(token, userID)),
+        addNewFeed: (token, pageID, feed) => dispatch(actions.addFeed(token, pageID, feed)),
     }
 };
 const mapStateToProps = (state) => {

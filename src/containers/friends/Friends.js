@@ -15,15 +15,16 @@ class Friends extends Component {
             type: 'headerTabsMenu',
             items: {
                 allFriend: {
-                    name: 'All Friends',
+                    name: 'Все друзья',
                     isActive: true,
                 },
                 response: {
-                    name: 'Response',
+
+                    name: 'Отправленные заявки',
                     isActive: false,
                 },
                 request: {
-                    name: 'Request',
+                    name: 'Запросы',
                     isActive: false,
                 },
             }

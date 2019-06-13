@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
+import Content from "../../../hoc/content/content";
+import {connect} from "react-redux";
 import InputField from "../../../components/ui/inputFieldWithGoogleEffect/InputField";
 import SubmitButton from "../../../components/ui/button/submitButton";
-import style from './searchFields.module.scss';
 import * as actions from './../../../store/actions/index'
-import {connect} from "react-redux";
-import {isTSConstructSignatureDeclaration} from "@babel/types";
 
-class SearchFields extends Component {
+class SettingsContent extends Component {
     state = {
-        search: {
+        edit: {
             name: {
                 elementType: 'input',
                 elementConfig: {
@@ -34,18 +33,42 @@ class SearchFields extends Component {
                 labelGoogleEffectActive: false,
                 googleEffect: true,
                 value: ''
+            },
+            userDescription: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    required: true,
+                },
+                LabelConfig: {
+                    labelText: "Статус (описание)",
+                },
+                labelGoogleEffectActive: false,
+                googleEffect: true,
+                value: ''
+            },
+            phone: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    required: true,
+                },
+                LabelConfig: {
+                    labelText: "Телефон",
+                },
+                labelGoogleEffectActive: false,
+                googleEffect: true,
+                value: ''
             }
         }
     };
 
+
     componentDidMount() {
-        let isData = false;
-        if (this.props.searchParams) {
-            for (let key in this.props.searchParams) {
-                const update = this.state.search[key];
-                update.value = this.props.searchParams[key];
-                if (update.value)
-                    isData = true;
+        if (this.props.userData)
+            for (let key in this.state.edit) {
+                const update = this.state.edit[key];
+                update.value = this.props.userData[key];
                 update.labelGoogleEffectActive = !update.labelGoogleEffectActive;
                 this.setState(state => {
                     return {
@@ -53,10 +76,8 @@ class SearchFields extends Component {
                     }
                 });
             }
-            if (isData)
-                this.onSearchClick();
-        }
     }
+
     googleEffectHandler = (id, formName) => {
         const updated = this.state[formName];
         if (updated[id].value)
@@ -73,25 +94,19 @@ class SearchFields extends Component {
         this.setState({[formName]: updated});
     };
 
-
-    onSearchClick = () => {
-        const searchParams = {};
-        for (let key in this.state.search) {
-            if (!this.state.search[key].value) {
-                alert('Enter all data');
-                return false;
-            }
-            searchParams[key] = this.state.search[key].value;
+    onChangeClick = () => {
+        let updatedValues = {};
+        for (let key in this.state.edit){
+            updatedValues[key] = this.state.edit[key].value;
         }
-        this.props.searchUsers(this.props.token, searchParams);
-    }
-
-    render() {
+        this.props.editUserData(this.props.token, updatedValues);
+    };
+    getGeneralContent = () => {
         const inputs = [];
-        for (let key in this.state.search) {
+        for (let key in this.state.edit) {
             inputs.push({
                 id: key,
-                config: this.state.search[key]
+                config: this.state.edit[key]
             });
         }
         ;
@@ -105,14 +120,28 @@ class SearchFields extends Component {
                 LabelConfig={input.config.LabelConfig}
                 googleEffect={input.config.googleEffect}
                 labelGoogleEffectActive={input.config.labelGoogleEffectActive}
-                googleEffectHandler={() => this.googleEffectHandler(input.id,'search')}
+                googleEffectHandler={() => this.googleEffectHandler(input.id,'edit')}
                 value={input.config.value}
-                changed={(event) => this.onChangeHandler(event, input.id,'search')}/>
+                changed={(event) => this.onChangeHandler(event, input.id,'edit')}/>
         });
+        return <>{inp} <SubmitButton onBTNclick={this.onChangeClick}>Change Data</SubmitButton></>;
+    };
+
+    render() {
+        let content = null;
+        switch (this.props.tab) {
+            case 'general':
+                content = this.getGeneralContent();
+                break;
+            case 'education':
+                content = <h1>Ed</h1>;
+                break;
+        }
         return (
-            <div className={style.searchFields}>
-                {inp}
-                <SubmitButton onBTNclick={this.onSearchClick}>Поиск</SubmitButton>
+            <div>
+                <Content>
+                    {content}
+                </Content>
             </div>
         );
     }
@@ -120,12 +149,13 @@ class SearchFields extends Component {
 
 const mapStateToProps = state => {
     return {
-        token: state.authorizationReducer.token
-    }
-}
-const mapDispatchToProps = dispatch => {
-    return {
-        searchUsers: (token, searchParams) => dispatch(actions.searchUsers(token, searchParams)),
+        token: state.authorizationReducer.token,
+        userData: state.authorizationReducer.user
     }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(SearchFields);
+const mapDispatchToProps = dispatch => {
+    return {
+        editUserData: (token, updatedValues)=>dispatch(actions.editUser(token,updatedValues)),
+    }
+};
+export default connect(mapStateToProps,mapDispatchToProps)(SettingsContent);

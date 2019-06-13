@@ -6,6 +6,7 @@
   border-radius: 50%;
   position: relative;
   z-index: 3;
+  cursor: pointer;
 }
 
 .menu-btn-smaller {
@@ -24,6 +25,16 @@
   width: 20px;
   height: 2px;
   background-color: #222;
+}
+.menu span{
+  overflow: hidden;
+}
+.menu span a{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
 }
 
 .menu-btn span::before,
@@ -66,7 +77,7 @@
   align-self: flex-start;
 }
 
-.menu a {
+.menu span {
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -87,7 +98,7 @@
   }
 }
 
-.menu-smaller a {
+.menu-smaller span {
   width: 30px;
   height: 30px;
   padding: 4px;
@@ -95,42 +106,42 @@
 
 
 
-.menu a:nth-child(1) {
+.menu span:nth-child(1) {
   transition-delay: 0.1s;
 }
 
-.menu a:nth-child(2) {
+.menu span:nth-child(2) {
   transition-delay: 0.2s;
 
 }
 
-.menu a:nth-child(3) {
+.menu span:nth-child(3) {
   transition-delay: 0.3s;
 }
 @for $i from 0 through 10 {
-  .menu a:nth-child(#{$i+1}){
+  .menu span:nth-child(#{$i+1}){
    transition-delay: 0.1s + $i*0.12s;
   }
 }
 
-.menu_active a:nth-child(1) {
+.menu_active span:nth-child(1) {
   transform: translate(-150%, 0%);
 }
 
-.menu_active a:nth-child(2) {
+.menu_active span:nth-child(2) {
   transform: translate(-100%, 100%);
 }
 
-.menu_active a:nth-child(3) {
+.menu_active span:nth-child(3) {
   transform: translate(0%, 150%);
 }
 
-.menu-btn_active_down a {
+.menu-btn_active_down span {
   left: calc(50% - 15px);
 }
 
 @for $i from 0 through 10 {
-  .menu-btn_active_down a:nth-child(#{$i+1}){
+  .menu-btn_active_down span:nth-child(#{$i+1}){
     transform: translateY(45px + $i*35px) translateX(0);
   }
 }

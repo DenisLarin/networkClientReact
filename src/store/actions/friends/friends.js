@@ -55,6 +55,10 @@ export const getFriends = (token, userID, status) => {
         else if (status == 'accepted' || status == 'allFriend') {
             data.status = 'accepted';
             axios.post('/takeuserFriends', data, config).then(response => {
+                if (!response.data.usersIDs) {
+                    dispatch(getFriendsSuccess([]));
+                    return;
+                } else
                 getUserByFriendsIDs(response, config, dispatch);
             }).catch(error => {
                 console.log(error);

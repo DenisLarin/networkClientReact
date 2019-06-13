@@ -79,7 +79,7 @@ class Feeds extends Component {
         });
         return (
             <div className={classes.feeds}>
-                <h2>Publications</h2>
+                <h2>Публикации</h2>
                 {feeds}
             </div>
         );

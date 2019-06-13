@@ -8,7 +8,7 @@ function Menu(props) {
             <NavLinkItem link='/userpage' exact>Моя страница</NavLinkItem>
             <NavLinkItem link='/friends' exact>Друзья</NavLinkItem>
             <NavLinkItem link='/search' exact>Поиск друзей</NavLinkItem>
-            <NavLinkItem link='/im' exact>Сообщения</NavLinkItem>
+            <NavLinkItem link='/settings' exact>Настройки</NavLinkItem>
         </ul>
     );
 }

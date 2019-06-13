@@ -32,7 +32,21 @@ export const getUser = (token, userID) => {
             .then(response => {
                 dispatch(getUserSuccess(response.data.user));
             }).catch(error => {
-                dispatch(getUserFailed(error.response));
+            dispatch(getUserFailed(error.response));
         });
     }
 };
+export const editUser = (token, updatedValues) => {
+    return dispatch => {
+        const config = {
+            headers: {
+                Authorization: token
+            }
+        };
+        axios.post('/changeUser', {updatedValues},config).then(response=>{
+           console.log(response.data);
+        }).catch(error=>{
+            console.log(error);
+        });
+    };
+}

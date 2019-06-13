@@ -14,7 +14,9 @@ function MenuTabs(props) {
     };
     let isActiveBackground = props.isActiveBackground ? true : false;
     let menus = tabsMenus.map(menuItem => {
-        return <MenuTab key={menuItem.id} tabMenuClickHandler={(event)=>props.tabMenuClickHandler(event,menuItem.id,props.tabsMenu.type)} isActive={menuItem.isActive} isActiveBackground={isActiveBackground}>{menuItem.name}</MenuTab>
+        return <MenuTab key={menuItem.id}
+                        tabMenuClickHandler={(event) => props.tabMenuClickHandler(event, menuItem.id, props.tabsMenu.type)}
+                        isActive={menuItem.isActive} isActiveBackground={isActiveBackground}>{menuItem.name}</MenuTab>
     });
     return (
         <div className={classes.menuTabs}>

@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import SearchFields from "./searchFields/SearchFields";
 import {connect} from "react-redux";
 import FriendCard from "../friends/friensCard/FriendCard";
+import './searchFriends.scss'
 
 class SearchFriends extends Component {
     state = {
         name: '',
         surname: '',
-
-    }
+    };
 
     componentWillMount() {
         if (this.props.match.params.searchParams) {
@@ -41,7 +41,9 @@ class SearchFriends extends Component {
             <div>
                 <div className="searchField">
                     <SearchFields searchParams={searchParams}/>
-                    {this.props.search.length>0 ? searchData : <h2>Not Found</h2>}
+                </div>
+                <div className="searchContent">
+                    {this.props.search.length>0 ? searchData : <h2>Нет данных</h2>}
                 </div>
             </div>
         );

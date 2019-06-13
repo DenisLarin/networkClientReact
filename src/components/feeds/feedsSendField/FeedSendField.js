@@ -8,7 +8,7 @@ function FeedSendField(props) {
     return (
         <div className={classes.send}>
             <Avatar avatarURL={props.avatarURL} smaller/>
-            <WriteNewFeedInput onChange={props.onChange} value={props.value} placeholder={"write something to " + props.userName} onKeyPress={props.onClick}/>
+            <WriteNewFeedInput onChange={props.onChange} value={props.value} placeholder={"Напиши что-то пользователю " + props.userName} onKeyPress={props.onClick}/>
             <SendIcon img={props.sendIcon} onClick={props.onClick}/>
         </div>
     );
