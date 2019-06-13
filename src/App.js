@@ -27,6 +27,7 @@ class App extends Component {
                         <Route path='/search/' exact component={SearchFriends}/>
                         <Route path='/settings/' exact component={Settings}/>
                         <Route path='/search/:searchParams' exact component={SearchFriends}/>
+                        <Redirect to={`/userpage/${this.props.userID}`}/>
                     </Switch>
                 </Layout>
             );
@@ -66,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

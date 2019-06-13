@@ -32,7 +32,6 @@ class UserPage extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.match.params.id != this.props.match.params.id) {
-            console.log(1232131);
             this.props.getUserData(this.props.token, this.props.match.params.id);
             this.props.reupdateLikes();
         }
