@@ -16,8 +16,12 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.props);
+
+
         var routes = null;
+        if (!this.props.userID){
+            return (<></>)
+        }
         if (this.props.isAuth) {
             routes = (
                 <Layout>
@@ -37,8 +41,8 @@ class App extends Component {
             } else {
                 routes = (
                     <Switch>
-                        <Route path='/' component={Welcome}/>
-                        <Redirect to="/"/>
+                        <Route path='/' exact component={Welcome}/>
+                        <Redirect to='/'/>
                     </Switch>
                 );
             }
