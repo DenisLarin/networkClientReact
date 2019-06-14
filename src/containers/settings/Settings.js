@@ -16,6 +16,13 @@ class Settings extends Component {
         },
         witchTab: 'general',
     };
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        document.title = "Натройки | " + this.state.headerTabsMenu.items[this.state.witchTab].name;
+    }
+    componentWillMount() {
+        document.title = "Натройки | " + this.state.headerTabsMenu.items[this.state.witchTab].name;
+    }
+
     tabMenuHandler = (event, id, type) => {
         const updatedBlock = this.state[type].items;
         if (this.state[type].items[id].isActive)

@@ -64,6 +64,10 @@ class Friends extends Component {
         return content;
     };
 
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        document.title = "Друзья | " + this.state.headerTabsMenu.items[this.state.witchTab].name;
+    }
+
     render() {
         let content = null;
         if (this.props.friends) {
@@ -91,7 +95,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getFriends: (token, userID, status) => dispatch(actions.getFriends(token, userID, status)),
-        reupdateLikes: ()=>dispatch(actions.reupdateLikes())
+        reupdateLikes: () => dispatch(actions.reupdateLikes())
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Friends);

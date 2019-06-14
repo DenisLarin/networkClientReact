@@ -156,8 +156,12 @@ class Welcome extends Component {
 
 
     componentDidMount() {
+
         if (this.props.isAuth)
             return <Redirect to="/userpage"/>
+    }
+    componentWillMount() {
+        document.title = "Добро пожаловать в deepnet";
     }
 
     googleEffectHandler = (id, formName) => {

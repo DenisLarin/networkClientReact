@@ -11,6 +11,8 @@ class SearchFriends extends Component {
     };
 
     componentWillMount() {
+
+        document.title = "Поиск друзей";
         if (this.props.match.params.searchParams) {
             const searchArray = this.props.match.params.searchParams.split('&');
             searchArray.map(s => {
@@ -22,11 +24,13 @@ class SearchFriends extends Component {
 
     renderSearchData = () => {
         const searchData = this.props.search.map(item => {
-            return <FriendCard key={item.userID} userID={item.userID} avatarURL={item.avatarURL} userName={item.name} userSurname={item.surname}
+            return <FriendCard key={item.userID} userID={item.userID} avatarURL={item.avatarURL} userName={item.name}
+                               userSurname={item.surname}
                                email={item.email} tab='searchFriend'/>
         });
         return searchData;
     };
+
 
     render() {
         let searchParams = {};
@@ -43,7 +47,7 @@ class SearchFriends extends Component {
                     <SearchFields searchParams={searchParams}/>
                 </div>
                 <div className="searchContent">
-                    {this.props.search.length>0 ? searchData : <h2>Нет данных</h2>}
+                    {this.props.search.length > 0 ? searchData : <h2>Нет данных</h2>}
                 </div>
             </div>
         );

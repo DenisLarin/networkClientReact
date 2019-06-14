@@ -25,17 +25,22 @@ class UserPage extends Component {
     };
 
     componentDidMount() {
+
+
         if (this.props.match.params.id) {
             this.props.getUserData(this.props.token, this.props.match.params.id);
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.userData)
+            document.title = this.props.userData.name + " " + this.props.userData.surname;
         if (prevProps.match.params.id != this.props.match.params.id) {
             this.props.getUserData(this.props.token, this.props.match.params.id);
             this.props.reupdateLikes();
         }
     }
+
 
     headerTabMenuClickHandler = (event, id, type) => {
         const updatedBlock = this.state[type].items;
