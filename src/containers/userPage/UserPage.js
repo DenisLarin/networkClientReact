@@ -55,16 +55,17 @@ class UserPage extends Component {
 
 
     render() {
+        console.log(this.props.userData);
+        if (!this.props.userData && !this.props.loading)
+            return (<h2>404</h2>)
         return (
-            this.props.userData ?
-                <div>
-                    <UserProfileHeader isOnline={this.props.isOnline} userData={this.props.userData}
-                                       headerTabsMenuClickHandler={this.headerTabMenuClickHandler}
-                                       headerTabsMenu={this.state.headerTabsMenu} userID={this.props.match.params.id}
-                                       updated={this.state.updated}/>
-                    <UserContent page={this.props.match.params.id} tab={this.state.witchTab}/>
-                </div>
-                : <h2>Модуль 404</h2>
+            <div>
+                <UserProfileHeader isOnline={this.props.isOnline} userData={this.props.userData}
+                                   headerTabsMenuClickHandler={this.headerTabMenuClickHandler}
+                                   headerTabsMenu={this.state.headerTabsMenu} userID={this.props.match.params.id}
+                                   updated={this.state.updated}/>
+                <UserContent page={this.props.match.params.id} tab={this.state.witchTab}/>
+            </div>
         );
     }
 }
@@ -73,14 +74,16 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getUserData: (token, userID) => dispatch(actions.getUser(token, userID)),
         addNewFeed: (token, pageID, feed) => dispatch(actions.addFeed(token, pageID, feed)),
-        reupdateLikes: ()=>dispatch(actions.reupdateLikes()),
+        reupdateLikes: () => dispatch(actions.reupdateLikes()),
     }
 };
 const mapStateToProps = (state) => {
     return {
         token: state.authorizationReducer.token,
         isOnline: state.authorizationReducer.isOnline,
-        userData: state.userReducer.user
+        userData: state.userReducer.user,
+        loading: state.userReducer.loading
+
     }
 };
 
