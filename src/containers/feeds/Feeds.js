@@ -66,7 +66,7 @@ class Feeds extends Component {
         let feeds = null;
         feeds = this.props.feeds.map(feed => {
             if (this.props.postsLikes) {
-                return <Feed feedID={feed.postID} userID={this.props.userID} key={feed.postID}
+                return <Feed feedID={feed.postID} userID={this.props.userID} author={feed.userID} key={feed.postID}
                              userSurname={feed.surname} userName={feed.name}
                              date={feed.postTime}
                              likedPost={this.props.postsLikes[feed.postID]}

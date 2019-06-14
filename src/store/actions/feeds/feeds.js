@@ -18,10 +18,10 @@ const getFeedsSuccess = (feeds) => {
         feeds
     }
 };
-export const updateCounters = (feedID, type,params)=>{
-    return{
+export const updateCounters = (feedID, type, params) => {
+    return {
         type: feedActions.UPDATE_COUNTERS,
-        payload: {feedID,type,params}
+        payload: {feedID, type, params}
     }
 };
 export const getFeeds = (token, pageID) => {
@@ -74,9 +74,31 @@ export const addFeed = (token, pageID, feed) => {
             }
         };
         axios.post('/addpost', payload, config).then(result => {
-            dispatch(getFeeds(token,pageID));
+            dispatch(getFeeds(token, pageID));
         }).catch(error => {
             console.log(error.response);
         })
     }
 };
+
+const successRemove = (feedID)=>{
+    return {
+        type: feedActions.REMOVE_FEED_SUCCESS,
+        feedID,
+    }
+};
+export const removeFeed = (token, feedID) => {
+    return dispatch => {
+        console.log(feedID);
+        const config = {
+            headers: {
+                Authorization: token
+            }
+        };
+        axios.post('/removePost', {postID: feedID}, config).then(result => {
+            dispatch(successRemove(feedID))
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+}

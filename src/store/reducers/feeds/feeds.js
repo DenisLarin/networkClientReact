@@ -19,7 +19,7 @@ const getFeedsSuccess = (state, action) => {
 };
 const updateCounters = (state, action) => {
     const payload = action.payload;
-    payload.type= payload.type+'s';
+    payload.type = payload.type + 's';
     let feed = null;
     for (let i in state.feeds) {
         if (state.feeds[i].postID == payload.feedID) {
@@ -37,13 +37,16 @@ const updateCounters = (state, action) => {
             }
             break;
         case 'remove':
-            feed[payload.type] = feed[payload.type] -1;
+            feed[payload.type] = feed[payload.type] - 1;
             break;
         case 'add':
             feed[payload.type] = feed[payload.type] + 1;
             break;
     }
     return state;
+};
+const removeFeedSuccess = (state, action) => {
+    return updateObject(state,{feeds: state.feeds.filter(fr=>fr.postID !== action.feedID)});
 };
 const reducer = (state = initState, action) => {
     switch (action.type) {
@@ -55,6 +58,8 @@ const reducer = (state = initState, action) => {
             return getFeedsSuccess(state, action);
         case feedsActionTypes.UPDATE_COUNTERS:
             return updateCounters(state, action);
+        case feedsActionTypes.REMOVE_FEED_SUCCESS:
+            return removeFeedSuccess(state, action);
         default:
             return state;
     }

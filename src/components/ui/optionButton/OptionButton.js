@@ -14,6 +14,8 @@ function OptionButton(props) {
         menuBTNclasses = ['menu-btn', 'menu-btn-smaller'];
         menuClasses = ['menu', 'menu-smaller'];
         menuWrapperClasses = ['menu-block', 'menu-block-smaller'];
+        if (props.absolute)
+            menuWrapperClasses = ['menu-block', 'menu-block-smaller', 'absolute'];
     }
     if (props.active) {
         menuBTNclasses = ['menu-btn', 'menu-btn_active'];

@@ -17,7 +17,9 @@ import Likes from './store/reducers/likes/likes'
 import Friends from './store/reducers/friends/friends'
 import Search from './store/reducers/search/search'
 
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+// const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 
 const rootReducer = combineReducers({
     authorizationReducer: Authorization,
