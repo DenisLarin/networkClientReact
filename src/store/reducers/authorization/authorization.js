@@ -1,6 +1,5 @@
 import * as accountActionTypes from '../../actions/actionsTypes/authorizationActions';
 import updateObject from './../../../shared/updateObject'
-import {ninvoke} from "q";
 
 const initialState = {
     token: null,
@@ -37,7 +36,7 @@ const signUPSuccess= (state, action)=>{
 };
 
 function logOut(state, action) {
-    return updateObject(state, {token: null,userID:null,isOnline:null});
+    return updateObject(state, {token: null,userID:-1,user:null,isOnline:null});
 }
 
 const reducer = (state = initialState, action) => {

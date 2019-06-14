@@ -9,6 +9,9 @@ import OptionButton from "../../ui/optionButton/OptionButton";
 
 import addFriend from '../../../assets/icons/friends/addFriend.png.svg'
 import settings from './../../../assets/icons/userProfile/settings.svg'
+import logout from './../../../assets/icons/userProfile/logout.svg'
+
+import {Redirect} from 'react-router-dom'
 
 import * as actions from './../../../store/actions/index'
 import {connect} from "react-redux";
@@ -18,8 +21,9 @@ class UserProfileHeader extends Component {
         showExternalMenu: false,
         menus: [
             {logo: addFriend, type: 'addFriend'},
-            {logo: settings, url:'/settings'}
-        ]
+            {logo: settings, url:'/settings'},
+            {logo: logout , type: 'logout', url: '/'}
+        ],
     };
     showMenuHandler = () => {
         this.setState(state => {
@@ -32,6 +36,9 @@ class UserProfileHeader extends Component {
         switch (type) {
             case 'addFriend':
                 this.props.addToFriend(this.props.token, this.props.userID);
+                break;
+            case 'logout':
+                this.props.logout();
                 break;
         }
     };
@@ -63,9 +70,12 @@ class UserProfileHeader extends Component {
                 </>
             );
         }
+
         return (
+
             <div className={classes.user__header}>
                 {content}
+                {this.state.redirect ? <Redirect to="/"/> : null}
             </div>
         );
     }
@@ -79,6 +89,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addToFriend: (token, userID) => dispatch(actions.addToFriend(token, userID)),
+        logout: ()=>dispatch(actions.logOut()),
     }
 }
 

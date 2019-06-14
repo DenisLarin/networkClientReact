@@ -16,8 +16,6 @@ class App extends Component {
     }
 
     render() {
-
-
         var routes = null;
         if (!this.props.userID){
             return (<></>)
