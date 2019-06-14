@@ -3,6 +3,7 @@ import classes from './feeds.module.scss'
 import Feed from "../../components/feeds/feed/Feed";
 import {connect} from "react-redux";
 import * as actions from './../../store/actions/index'
+
 class Feeds extends Component {
     componentDidMount() {
         this.props.getFeeds(this.props.token, this.props.page);
@@ -21,7 +22,7 @@ class Feeds extends Component {
         const userID = this.props.userID;
         if (!this.props.postsLikes[feedID]) { //если на записи нет лайков, то добавляем
             this.props.addLikeDislike(this.props.token, {postID: feedID, type, userID: this.props.userID});
-            this.props.updateCounters(feedID,type, 'add');
+            this.props.updateCounters(feedID, type, 'add');
         } else { //проверяем ставил ли пользователь лайк/дизлайк на этот пост
             let isGo = false;
             this.props.postsLikes[feedID].map(likes => {
@@ -33,21 +34,20 @@ class Feeds extends Component {
                             type,
                             userID: this.props.userID
                         });
-                        this.props.updateCounters(feedID,type, 'change');
-                    }
-                    else {
+                        this.props.updateCounters(feedID, type, 'change');
+                    } else {
                         this.props.removeLikeDislike(this.props.token, {
                             postID: feedID,
                             type,
                             userID: this.props.userID
                         });
-                        this.props.updateCounters(feedID,type, 'remove');
+                        this.props.updateCounters(feedID, type, 'remove');
                     }
                 }
             });
             if (!isGo) {
                 this.props.addLikeDislike(this.props.token, {postID: feedID, type, userID: this.props.userID});
-                this.props.updateCounters(feedID,type, 'add');
+                this.props.updateCounters(feedID, type, 'add');
             }
         }
     };
@@ -57,6 +57,11 @@ class Feeds extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
+        if (nextProps.feeds.length > 0) {
+            if (nextProps.feeds[0].wherePageID != this.props.page) {
+                this.props.getFeeds(this.props.token, this.props.page);
+            }
+        }
         if (nextProps.feeds.length > 0 && !nextProps.postsLikes) {
             this.props.getLDL(this.props.token, nextProps.feeds);
         }
@@ -93,7 +98,7 @@ const mapDispatchToProps = dispatch => {
         addLikeDislike: (token, like) => dispatch(actions.addLikeDislike(token, like)),
         removeLikeDislike: (token, like) => dispatch(actions.removeLikeDislike(token, like)),
         changeLikeDislike: (token, like) => dispatch(actions.changeLikeDislike(token, like)),
-        updateCounters: (feedID, type,params)=>dispatch(actions.updateCounters(feedID,type,params)),
+        updateCounters: (feedID, type, params) => dispatch(actions.updateCounters(feedID, type, params)),
     }
 };
 const mapStateToProps = state => {

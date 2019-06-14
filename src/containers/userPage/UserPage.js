@@ -57,7 +57,7 @@ class UserPage extends Component {
     render() {
         console.log(this.props.userData);
         if (!this.props.userData && !this.props.loading)
-            return (<h2>404</h2>)
+            return (<h2>404</h2>);
         return (
             <div>
                 <UserProfileHeader isOnline={this.props.isOnline} userData={this.props.userData}
