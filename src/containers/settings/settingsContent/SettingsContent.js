@@ -59,6 +59,19 @@ class SettingsContent extends Component {
                 labelGoogleEffectActive: false,
                 googleEffect: true,
                 value: ''
+            },
+            avatar: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'file',
+                    required: true,
+                },
+                LabelConfig: {
+                    labelText: "Аватар",
+                },
+                labelGoogleEffectActive: false,
+                googleEffect: false,
+                value: ''
             }
         }
     };
@@ -127,9 +140,6 @@ class SettingsContent extends Component {
         });
         return <>
             {inp}
-            <label htmlFor="avatar">Фотография для аватарки </label>
-            <input id="avatar" type="file" accept="image/*"/>
-            <br/>
             <SubmitButton onBTNclick={this.onChangeClick}>Change Data</SubmitButton>
         </>
     }
