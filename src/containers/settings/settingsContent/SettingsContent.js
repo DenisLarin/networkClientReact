@@ -90,13 +90,14 @@ class SettingsContent extends Component {
         updated[id].value = event.target.value;
         if (updated[id].value && !updated[id].labelGoogleEffectActive) {
             updated[id].labelGoogleEffectActive = true;
-        };
+        }
+        ;
         this.setState({[formName]: updated});
     };
 
     onChangeClick = () => {
         let updatedValues = {};
-        for (let key in this.state.edit){
+        for (let key in this.state.edit) {
             updatedValues[key] = this.state.edit[key].value;
         }
         this.props.editUserData(this.props.token, updatedValues);
@@ -120,12 +121,18 @@ class SettingsContent extends Component {
                 LabelConfig={input.config.LabelConfig}
                 googleEffect={input.config.googleEffect}
                 labelGoogleEffectActive={input.config.labelGoogleEffectActive}
-                googleEffectHandler={() => this.googleEffectHandler(input.id,'edit')}
+                googleEffectHandler={() => this.googleEffectHandler(input.id, 'edit')}
                 value={input.config.value}
-                changed={(event) => this.onChangeHandler(event, input.id,'edit')}/>
+                changed={(event) => this.onChangeHandler(event, input.id, 'edit')}/>
         });
-        return <>{inp} <SubmitButton onBTNclick={this.onChangeClick}>Change Data</SubmitButton></>;
-    };
+        return <>
+            {inp}
+            <label htmlFor="avatar">Фотография для аватарки </label>
+            <input id="avatar" type="file" accept="image/*"/>
+            <br/>
+            <SubmitButton onBTNclick={this.onChangeClick}>Change Data</SubmitButton>
+        </>
+    }
 
     render() {
         let content = null;
@@ -155,7 +162,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        editUserData: (token, updatedValues)=>dispatch(actions.editUser(token,updatedValues)),
+        editUserData: (token, updatedValues) => dispatch(actions.editUser(token, updatedValues)),
     }
 };
-export default connect(mapStateToProps,mapDispatchToProps)(SettingsContent);
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsContent);

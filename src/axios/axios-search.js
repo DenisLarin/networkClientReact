@@ -1,8 +1,8 @@
 import axios from 'axios';
+import {BASEURL} from './../config/config'
 
 const instance = axios.create({
-    // baseURL: "http://localhost:3000/search/",
-    baseURL: "http://networkapi.worklabserver.tmweb.ru:3000/search/",
+    baseURL: BASEURL +"/search/",
     headers:{
         'Content-Type': 'application/json;charset=UTF-8',
         "Access-Control-Allow-Origin": "*",
